@@ -1,6 +1,6 @@
 #!/bin/sh
 # V2Ray new configuration
-cat <<-EOF > /etc/v2ray/config.json
+cat <<-EOF > /etc/xray/config.json
 {
     "inbounds": [
         {
@@ -17,7 +17,7 @@ cat <<-EOF > /etc/v2ray/config.json
                 "disableInsecureEncryption": true
             },
             "streamSettings": {
-                "network": "tcp"
+                "network": "ws"
             }
         }
     ],
@@ -29,4 +29,4 @@ cat <<-EOF > /etc/v2ray/config.json
 }
 EOF
 # Run V2Ray
-/usr/bin/v2ray/v2ray -config=/etc/v2ray/config.json
+/usr/bin/xray/xray -config=/etc/xray/config.json
