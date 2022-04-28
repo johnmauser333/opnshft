@@ -26,7 +26,7 @@ cat <<-EOF > /etc/xray/config.json
             "settings": {
                 "clients": [
                     {
-                        "id": "$UUID",
+                        "id": "4e87136b-ee03-4c23-b567-48c651cf3707",
                         "alterId": 0,
                         "security": "chacha20-poly1305"
                     }
