@@ -1,4 +1,5 @@
 FROM alpine:3.5
+ENV CONFIG_JSON=none
 RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
  && curl -L -H "Cache-Control: no-cache" -o /xray.zip https://github.com/XTLS/Xray-core/releases/download/v1.5.4/Xray-linux-64.zip \
  && mkdir /usr/bin/xray /etc/xray \
@@ -10,4 +11,4 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
 ADD configure.sh /configure.sh
 RUN chmod +x /configure.sh
 ENTRYPOINT ["sh", "/configure.sh"]
-EXPOSE 8080
+EXPOSE 3333
