@@ -3,16 +3,17 @@
 cat <<-EOF > /etc/xray/config.json
 {
     "inbounds": [
-        {
-            "tag": "in_tomcat",
-            "port": 3737,
-            "protocol": "dokodemo-door",
-            "settings": {
-                "address": "127.0.0.1",
-                "port": 8080,
-                "network": "tcp,udp"
-            }
-        },
+//        {
+//            "tag": "in_tomcat",
+//            "port": 443,
+//            "protocol": "dokodemo-door",
+//            "settings": {
+//                "address": "127.0.0.1",
+//               "port": 8080,
+//                "network": "tcp"
+//            }
+        
+//        },
         {
             "tag": "in_interconn",
             "port": 3333,
@@ -29,8 +30,23 @@ cat <<-EOF > /etc/xray/config.json
             "streamSettings": {
               "network": "ws"
             }
-        }
+        },
+        {
+            "tag": "clientin",
+            "port": 3737,
+            "protocol": "http",
+            "settings": {
+              "auth": "noauth"
+            },
+    "streamSettings": {
+      "network": "ws",
+      "security": "none"
+    },
+    "tag": "clientin",
+    "sniffing": {}
+   }
     ],
+    "outbounds": [{"tag": "crossfire", "protocol": "freedom", "settings": {}}],
     "reverse": {
         "portals": [
             {
@@ -47,6 +63,22 @@ cat <<-EOF > /etc/xray/config.json
                     "in_tomcat"
                 ],
                 "outboundTag": "portal"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "clientin"
+                ],
+                "ip": "192.168.50.50",
+                "port": "3333",
+                "outboundTag": "portal"
+            },
+                        {
+                "type": "field",
+                "inboundTag": [
+                    "clientin"
+                ],
+                "outboundTag": "crossfire"
             },
             {
                 "type": "field",
