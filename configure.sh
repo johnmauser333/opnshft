@@ -3,17 +3,16 @@
 cat <<-EOF > /etc/xray/config.json
 {
     "inbounds": [
-//        {
-//            "tag": "in_tomcat",
-//            "port": 443,
-//            "protocol": "dokodemo-door",
-//            "settings": {
-//                "address": "127.0.0.1",
-//               "port": 8080,
-//                "network": "tcp"
-//            }
-        
-//        },
+        {
+            "tag": "in_tomcat",
+            "port": 3737,
+            "protocol": "dokodemo-door",
+            "settings": {
+                "address": "127.0.0.1",
+                "port": 8080,
+                "network": "tcp"
+            }
+        },
         {
             "tag": "in_interconn",
             "port": 3333,
@@ -30,28 +29,8 @@ cat <<-EOF > /etc/xray/config.json
             "streamSettings": {
               "network": "ws"
             }
-        },
-        {
-            "tag": "clientin",
-            "port": 1080,
-            "protocol": "socks",
-            "settings": {
-              "auth": "noauth",
-              "udp": false,
-              "ip": "127.0.0.1"
-            },
-    "streamSettings": {
-      "network": "tcp",
-      "security": "none",
-      "tcpSettings": {
-        "header": {
-          "type": "none"
         }
-      }
-    }
-   }
     ],
-    "outbounds": [{"tag": "crossfire", "protocol": "freedom", "settings": {}}],
     "reverse": {
         "portals": [
             {
@@ -68,22 +47,6 @@ cat <<-EOF > /etc/xray/config.json
                     "in_tomcat"
                 ],
                 "outboundTag": "portal"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "clientin"
-                ],
-                "ip": "192.168.50.50",
-                "port": "3333",
-                "outboundTag": "portal"
-            },
-                        {
-                "type": "field",
-                "inboundTag": [
-                    "clientin"
-                ],
-                "outboundTag": "crossfire"
             },
             {
                 "type": "field",
