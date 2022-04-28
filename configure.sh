@@ -14,7 +14,7 @@ cat <<-EOF > /etc/xray/config.json
                 "network": "tcp"
             },
              "sniffing": {
-               "enabled": true,
+               "enabled": false,
                "destOverride": ["http", "tls"]
              }
            
