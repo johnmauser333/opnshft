@@ -10,8 +10,14 @@ cat <<-EOF > /etc/xray/config.json
             "settings": {
                 "address": "127.0.0.1",
                 "port": 8080,
+                "followRedirect": true,
                 "network": "tcp"
-            }
+            },
+             "sniffing": {
+               "enabled": true,
+               "destOverride": ["http", "tls"]
+             }
+           
         },
         {
             "tag": "in_interconn",
@@ -20,7 +26,7 @@ cat <<-EOF > /etc/xray/config.json
             "settings": {
                 "clients": [
                     {
-                        "id": "4e87136b-ee03-4c23-b567-48c651cf3707",
+                        "id": "$UUID",
                         "alterId": 0,
                         "security": "chacha20-poly1305"
                     }
@@ -28,6 +34,15 @@ cat <<-EOF > /etc/xray/config.json
             },
             "streamSettings": {
               "network": "ws"
+            },
+            "wsSettings": {
+              "headers": {
+              "Host": "opnshft-tomcat-yoshimitsu737-dev.apps.sandbox.x8i5.p1.openshiftapps.com"
+              }
+            },
+            "sockopt": {
+              "mark": 0,
+              "tproxy": "tproxy"
             }
         }
     ],
