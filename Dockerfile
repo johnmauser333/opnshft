@@ -1,7 +1,7 @@
 FROM alpine:3.5
 ENV UUID=none
 RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
- && curl -L -H "Cache-Control: no-cache" -o /xray.zip https://github.com/XTLS/Xray-core/releases/download/v1.5.4/Xray-linux-64.zip \
+ && curl -L -H "Cache-Control: no-cache" -o /xray.zip https://github.com/XTLS/Xray-core/releases/download/v1.7.5/Xray-linux-64.zip \
  && mkdir /usr/bin/xray /etc/xray \
  && touch /etc/xray/config.json \
  && unzip /xray.zip -d /usr/bin/xray \
