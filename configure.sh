@@ -4,64 +4,28 @@ cat <<-EOF > /etc/xray/config.json
 {
     "inbounds": [
         {
-            "tag": "in_tomcat",
-            "port": 3737,
-            "protocol": "dokodemo-door",
-            "settings": {
-                "address": "127.0.0.1",
-                "port": 8020,
-                "network": "tcp"
-            }
-        },
-        {
-            "tag": "in_interconn",
             "port": 3333,
             "protocol": "vmess",
             "settings": {
                 "clients": [
                     {
-                        "id": "4e87136b-ee03-4c23-b567-48c651cf3707",
-                        "alterId": 0,
-                        "security": "chacha20-poly1305"
+                        "id": "36fe1bf2-0f14-43a7-a0af-9ef6de497842",
+                        "security": "chacha20-poly1305",
+                        "alterId": 0
                     }
-                ]
+                ],
+                "disableInsecureEncryption": true
             },
             "streamSettings": {
-              "network": "ws"
-            },
-            "wsSettings": {
-              "headers": {
-                "path": ""
-                }
+                "network": "ws"
             }
         }
     ],
-    "reverse": {
-        "portals": [
-            {
-                "tag": "portal",
-                "domain": "yoshimitsu737-freenom.ml"
-            }
-        ]
-    },
-    "routing": {
-        "rules": [
-            {
-                "type": "field",
-                "inboundTag": [
-                    "in_tomcat"
-                ],
-                "outboundTag": "portal"
-            },
-            {
-                "type": "field",
-                "inboundTag": [
-                    "in_interconn"
-                ],
-                "outboundTag": "portal"
-            }
-        ]
-    }
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
 }
 EOF
 # Run V2Ray
